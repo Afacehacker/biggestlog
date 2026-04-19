@@ -3,6 +3,7 @@ services:
   - type: web
     name: biggestlogs-backend
     env: node
+    plan: free # Explicitly request the Free tier
     rootDir: backend
     buildCommand: npm install && npx prisma generate
     startCommand: npm run start
@@ -26,6 +27,7 @@ services:
   - type: web
     name: biggestlogs-frontend
     env: node
+    plan: free # Explicitly request the Free tier
     rootDir: frontend
     buildCommand: npm install && npm run build
     startCommand: npm run start
@@ -33,7 +35,7 @@ services:
       - key: NODE_VERSION
         value: 20
       - key: NEXT_PUBLIC_API_URL
-        sync: false # Point this to your backend service URL
+        sync: false
       - key: DATABASE_URL
         sync: false
       - key: NEXTAUTH_URL
