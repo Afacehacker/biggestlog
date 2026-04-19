@@ -4,8 +4,8 @@ services:
     name: biggestlogs-backend
     env: node
     plan: free
-    # Added --force to npm install to overcome corrupted cache issues on Render
-    buildCommand: npm install --force && npx prisma generate
+    # Force complete deletion of node_modules to solve corrupted @prisma/engines cache
+    buildCommand: rm -rf node_modules && npm install && npx prisma generate
     startCommand: npm run server
     envVars:
       - key: NODE_VERSION
@@ -28,7 +28,7 @@ services:
     name: biggestlogs-frontend
     env: node
     plan: free
-    buildCommand: npm install --force && npx prisma generate && npm run build
+    buildCommand: rm -rf node_modules && npm install && npx prisma generate && npm run build
     startCommand: npm run start
     envVars:
       - key: NODE_VERSION
