@@ -4,7 +4,8 @@ services:
     name: biggestlogs-backend
     env: node
     plan: free
-    buildCommand: npm install && npx prisma generate
+    # Added --force to npm install to overcome corrupted cache issues on Render
+    buildCommand: npm install --force && npx prisma generate
     startCommand: npm run server
     envVars:
       - key: NODE_VERSION
@@ -27,8 +28,7 @@ services:
     name: biggestlogs-frontend
     env: node
     plan: free
-    # Critical fix: Generating prisma client BEFORE building the next app
-    buildCommand: npm install && npx prisma generate && npm run build
+    buildCommand: npm install --force && npx prisma generate && npm run build
     startCommand: npm run start
     envVars:
       - key: NODE_VERSION
